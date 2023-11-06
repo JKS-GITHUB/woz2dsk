@@ -88,6 +88,7 @@ die $usage->text
 
 my ($in_file, $out_file) = @ARGV;
 
+# -Termux eithout 'proot -0'------------
 # open source file for reading
 open(SRC,'<',$in_file) or die "$in_file: cannot read. $!\n";
 
@@ -98,15 +99,18 @@ while(<SRC>){
    print DES $_;	
 }
 
-# always close the filehandles
+# close the filehandles
 close(SRC);
 close(DES);
+#---------------------------------------
 
+#-Original------------------------------
 # die "$in_file: cannot read\n"
 #  unless -r $in_file;
 
 # die "$out_file: cannot write\n"
 #  unless !-e $out_file || -w $out_file;
+#---------------------------------------
 
 
 sub debug {
