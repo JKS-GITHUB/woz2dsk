@@ -23,7 +23,7 @@
 use v5.14;
 use strict;
 use warnings;
-no warnings qw( experimental::smartmatch );
+no warnings 'deprecated', qw( experimental::smartmatch );
 
 use IO::File;
 use File::Slurp qw(slurp);
@@ -88,11 +88,25 @@ die $usage->text
 
 my ($in_file, $out_file) = @ARGV;
 
-die "$in_file: cannot read\n"
-  unless -r $in_file;
+# open source file for reading
+open(SRC,'<',$in_file) or die "$in_file: cannot read. $!\n";
 
-die "$out_file: cannot write\n"
-  unless !-e $out_file || -w $out_file;
+# open destination file for writing
+open(DES,'>',$out_file) or die "$out_file: cannot write. $!\n";
+
+while(<SRC>){
+   print DES $_;	
+}
+
+# always close the filehandles
+close(SRC);
+close(DES);
+
+# die "$in_file: cannot read\n"
+#  unless -r $in_file;
+
+# die "$out_file: cannot write\n"
+#  unless !-e $out_file || -w $out_file;
 
 
 sub debug {
