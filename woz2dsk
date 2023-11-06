@@ -88,7 +88,7 @@ die $usage->text
 
 my ($in_file, $out_file) = @ARGV;
 
-# -Termux eithout 'proot -0'------------
+#-Termux without 'proot -0'-------------
 # open source file for reading
 open(SRC,'<',$in_file) or die "$in_file: cannot read. $!\n";
 
@@ -111,7 +111,6 @@ close(DES);
 # die "$out_file: cannot write\n"
 #  unless !-e $out_file || -w $out_file;
 #---------------------------------------
-
 
 sub debug {
   return unless $opt->debug;
